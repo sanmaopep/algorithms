@@ -5,23 +5,22 @@ type Container interface {
 	Empty() bool
 }
 
-type Pushable interface {
+type PushAble interface {
 	Push(value int)
 }
 
-type Popable interface {
+type PopAble interface {
 	Pop() int
 	Top() int
 }
 
 type Comparable interface {
-	GreaterThan(Comparable) bool
-	LessThan(Comparable) bool
+	Compare(Comparable) int
 }
 
 type Set interface {
-	Search (key Comparable) bool
-	Insert (key Comparable)
-	Delete (key Comparable)
+	Search (key Comparable) interface{}
+	Insert (key Comparable, value interface{}) error
+	Delete (key Comparable) error
 	Print ()
 }

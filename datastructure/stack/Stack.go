@@ -1,6 +1,15 @@
 package stack
 
-import "errors"
+import (
+	"algorithms/datastructure/interfaces"
+	"errors"
+)
+
+type Stacker interface {
+	interfaces.Container
+	interfaces.PushAble
+	interfaces.PopAble
+}
 
 type Stack []interface{}
 
