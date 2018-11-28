@@ -1,7 +1,10 @@
 package tree
 
+import "algorithms/datastructure/interfaces"
+
 type BinaryTreeNode struct {
-	value int
+	key interfaces.Comparable
+	value interface{}
 	left *BinaryTreeNode
 	right *BinaryTreeNode
 }

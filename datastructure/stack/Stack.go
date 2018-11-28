@@ -1,25 +1,38 @@
 package stack
 
-type Stack []int
+import "errors"
 
-func (stack *Stack) size() int {
+type Stack []interface{}
+
+func (stack *Stack) Empty() bool {
+	return stack.Size() == 0
+}
+
+func (stack *Stack) Size() int {
 	return len(*stack)
 }
 
-func (stack *Stack) pop() int {
-	var ret int
-	if stack.size() != 0 {
+func (stack *Stack) Pop() (interface{},error) {
+	var ret interface{}
+	var err error
+	if stack.Empty() {
 		ret = (*stack)[len(*stack)-1]
 		*stack = (*stack)[:len(*stack)-1]
+	}else{
+		err = errors.New("Stack empty!")
 	}
-	return ret
+	return ret, err
 }
 
-func (stack *Stack) top() int {
-	return (*stack)[len(*stack)-1]
+func (stack *Stack) Top() (interface{},error) {
+	if stack.Empty() {
+		return (*stack)[len(*stack)-1], nil
+	}else{
+		return 0, errors.New("Stack empty!")
+	}
 }
 
-func (stack *Stack) push(value int) {
+func (stack *Stack) Push(value interface{}) {
 	*stack = append(*stack,value)
 }
 

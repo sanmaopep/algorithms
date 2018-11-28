@@ -1,14 +1,27 @@
 package interfaces
 
 type Container interface {
-	size() int
+	Size() int
+	Empty() bool
 }
 
 type Pushable interface {
-	push(value int)
+	Push(value int)
 }
 
 type Popable interface {
-	pop() int
-	top() int
+	Pop() int
+	Top() int
+}
+
+type Comparable interface {
+	GreaterThan(Comparable) bool
+	LessThan(Comparable) bool
+}
+
+type Set interface {
+	Search (key Comparable) bool
+	Insert (key Comparable)
+	Delete (key Comparable)
+	Print ()
 }
