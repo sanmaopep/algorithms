@@ -1,4 +1,4 @@
-package interfaces
+package utils
 
 type Container interface {
 	Size() int
@@ -15,12 +15,12 @@ type PopAble interface {
 }
 
 type Comparable interface {
-	Compare(Comparable) int
+	Compare(comparable interface{}) int
 }
 
 type Set interface {
-	Search (key Comparable) interface{}
-	Insert (key Comparable, value interface{}) error
-	Delete (key Comparable) error
+	Search (key int) interface{}
+	Insert (key int, value interface{}) error
+	Delete (key int) error
 	Print ()
 }

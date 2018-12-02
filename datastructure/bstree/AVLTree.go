@@ -1,73 +1,37 @@
 package bstree
 
-import (
-	"algorithms/datastructure/interfaces"
-	"errors"
-)
-
-type avlAttribute struct {
-	balance int // left_height - right_height
+func balFac(entry *Entry) int{
+	return height(entry.left)-height(entry.right)
 }
 
-func updateBalance(curr *Entry) {
+func balance(entry *Entry) {
 
-	for curr != nil {
-		switch {
-		case curr.left == nil && curr.right == nil:
-			curr.attribute.(avlAttribute).balance = 0
-		case curr.left == nil:
-			curr.attribute.(avlAttribute).balance =
-				-curr.right.attribute.(avlAttribute).balance - 1
-		case curr.right == nil:
-			curr.attribute.(avlAttribute).balance =
-				curr.left.attribute.(avlAttribute).balance + 1
-		default:
-			curr.attribute.(avlAttribute).balance =
-				curr.left.attribute.(avlAttribute).balance - curr.right.
-					attribute.(avlAttribute).balance
-		}
-		curr = curr.parent
-	}
 
 }
 
 type AVLTree struct {
-	head Entry
+	head *Entry
 }
 
-func (avlTree *AVLTree) Search(key interfaces.Comparable) interface{} {
-	if entry, ok := avlTree.head.searchNode(key); ok {
+func (avlTree *AVLTree) Search(key int) interface{} {
+	if entry, _, ok := searchNode(&avlTree.head, key); ok {
 		return entry.value
 	} else {
 		return nil
 	}
 }
 
-func (avlTree *AVLTree) Insert(key interfaces.Comparable, value interface{}) error {
-	if entry, ok := avlTree.head.searchNode(key); ok {
-		return errors.New("Key Existed")
-	} else {
-		cmp := key.Compare(entry.key)
-		insertEntry := &Entry{
-			key:    key,
-			value:  value,
-			parent: entry,
-		}
-
-		switch {
-		case cmp > 0:
-			entry.right = insertEntry
-		case cmp < 0:
-			entry.left = insertEntry
-		}
-
-		// update balance
-
-		return nil
+func (avlTree *AVLTree) Insert(key int, value interface{}) bool {
+	_, ok := insertNode(&avlTree.head, key, value);
+	if !ok {
+		return ok
 	}
+	// find unbalanced node
+
+	return ok
 }
 
-func (avlTree *AVLTree) Delete(key interfaces.Comparable) error {
+func (avlTree *AVLTree) Delete(key int) bool {
 	panic("implement me")
 }
 
